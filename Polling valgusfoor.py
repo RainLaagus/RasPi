@@ -9,32 +9,34 @@ GPIO.setup(7, GPIO.OUT)
 GPIO.setup(12, GPIO.OUT)
 GPIO.setup(20, GPIO.OUT)
 GPIO.setup(16, GPIO.OUT)
-GPIO.setup(21, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
+GPIO.setup(1, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 
-nupp = "on"
+nupp = "off"
 try:
     while True:
         GPIO.output(25, True)
         GPIO.output(16, True)
         if nupp == "on":
             nupp = "off"
+            GPIO.output(12, False)
             GPIO.output(16, False)
             GPIO.output(20, True)
         time.sleep(5)
-        if GPIO.input(21) == GPIO.HIGH:
+        GPIO.output(16, True)
+        if GPIO.input(1) == GPIO.LOW:
             nupp = "on"
             GPIO.output(12, True)
         GPIO.output(20, False)
         GPIO.output(25, False)
         GPIO.output(8, True)
         time.sleep(1)
-        if GPIO.input(21) == GPIO.HIGH:
+        if GPIO.input(1) == GPIO.LOW:
             nupp = "on"
             GPIO.output(12, True)
         GPIO.output(8, False)
         GPIO.output(7, True)
         time.sleep(5)
-        if GPIO.input(21) == GPIO.HIGH:
+        if GPIO.input(1) == GPIO.LOW:
             nupp = "on"
             GPIO.output(12, True)
         GPIO.output(7, False)
@@ -43,13 +45,10 @@ try:
             time.sleep(0.4)
             GPIO.output(8, False)
             time.sleep(0.4)
-        if GPIO.input(21) == GPIO.HIGH:
+        if GPIO.input(1) == GPIO.LOW:
             nupp = "on"
             GPIO.output(12, True)
-        if GPIO.input(channel):
-            print('Input was HIGH')
-        else:
-            print('Input was LOW')
+
 
 except KeyboardInterrupt:
     print("Keyboard interrupt")
