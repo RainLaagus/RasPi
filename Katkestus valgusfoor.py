@@ -11,24 +11,24 @@ GPIO.setup(20, GPIO.OUT)
 GPIO.setup(16, GPIO.OUT)
 GPIO.setup(1, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 
-def katkestus(1):
-    global.nupp = "on"
-    GPIO.output(12, True)
 
-GPIO.add_event_detect(1, GPIO.RISING, callback=katkestus)
+GPIO.add_event_detect(1, GPIO.RISING)
 
 nupp = "off"
 try:
     while True:
-        if GPIO.event_detected(1):
-            katkestus(1)
+        
+            
         GPIO.output(25, True)
         GPIO.output(16, True)
         if nupp == "on":
-            nupp = "off"
-            GPIO.output(12, False)
+            if nupp_p6leb == "jah":
+                GPIO.output(12, True)
+            
             GPIO.output(16, False)
             GPIO.output(20, True)
+            nupp = "off"
+            GPIO.output(12, False)
         time.sleep(5)
         GPIO.output(16, True)
         GPIO.output(20, False)
@@ -44,6 +44,11 @@ try:
             time.sleep(0.4)
             GPIO.output(8, False)
             time.sleep(0.4)
+        nupp_p6leb = "ei"
+        if GPIO.event_detected(1):
+            GPIO.output(12, True)
+            nupp_p6leb = "jah"
+            nupp = "on"
 
 
 
