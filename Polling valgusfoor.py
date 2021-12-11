@@ -46,6 +46,10 @@ try:
         if GPIO.input(21) == GPIO.HIGH:
             nupp = "on"
             GPIO.output(12, True)
+        if GPIO.input(channel):
+            print('Input was HIGH')
+        else:
+            print('Input was LOW')
 
 except KeyboardInterrupt:
     print("Keyboard interrupt")
