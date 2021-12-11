@@ -24,19 +24,15 @@ GPIO.add_event_detect(jala_nupp, GPIO.RISING)
 
 nupp = "off"
 try:
-    while True:
-        
-            
+    while True:   
         GPIO.output(auto_punane, True)
         GPIO.output(jala_punane, True)
         if nupp == "on":
-            if nupp_p6leb == "jah":
-                GPIO.output(jala_sinine, True)
-            
             GPIO.output(jala_punane, False)
             GPIO.output(jala_roheline, True)
             nupp = "off"
             GPIO.output(jala_sinine, False)
+            
         time.sleep(5)
         GPIO.output(jala_punane, True)
         GPIO.output(jala_roheline, False)
@@ -47,15 +43,15 @@ try:
         GPIO.output(7, True)
         time.sleep(5)
         GPIO.output(7, False)
+        
         for _ in range(0,3):
             GPIO.output(auto_kollane, True)
             time.sleep(0.4)
             GPIO.output(auto_kollane, False)
             time.sleep(0.4)
-        nupp_p6leb = "ei"
+            
         if GPIO.event_detected(jala_nupp):
             GPIO.output(jala_sinine, True)
-            nupp_p6leb = "jah"
             nupp = "on"
 
 
