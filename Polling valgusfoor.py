@@ -11,43 +11,51 @@ GPIO.setup(20, GPIO.OUT)
 GPIO.setup(16, GPIO.OUT)
 GPIO.setup(1, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 
+auto_punane = 25
+jala_punane = 16
+auto_kollane = 8
+auto_roheline = 7
+jala_roheline = 20
+jala_sinine = 12
+jala_nupp = 1
+
 nupp = "off"
 try:
     while True:
-        GPIO.output(25, True)
-        GPIO.output(16, True)
+        GPIO.output(auto_punane, True)
+        GPIO.output(jala_punane, True)
         if nupp == "on":
             nupp = "off"
-            GPIO.output(12, False)
-            GPIO.output(16, False)
-            GPIO.output(20, True)
+            GPIO.output(jala_sinine, False)
+            GPIO.output(jala_punane, False)
+            GPIO.output(jala_roheline, True)
         time.sleep(5)
         GPIO.output(16, True)
-        if GPIO.input(1) == GPIO.LOW:
+        if GPIO.input(jala_nupp) == GPIO.LOW:
             nupp = "on"
-            GPIO.output(12, True)
-        GPIO.output(20, False)
-        GPIO.output(25, False)
-        GPIO.output(8, True)
+            GPIO.output(jala_sinine, True)
+        GPIO.output(jala_roheline, False)
+        GPIO.output(auto_punane, False)
+        GPIO.output(auto_kollane, True)
         time.sleep(1)
-        if GPIO.input(1) == GPIO.LOW:
+        if GPIO.input(jala_nupp) == GPIO.LOW:
             nupp = "on"
-            GPIO.output(12, True)
-        GPIO.output(8, False)
-        GPIO.output(7, True)
+            GPIO.output(jala_sinine, True)
+        GPIO.output(auto_kollane, False)
+        GPIO.output(auto_roheline, True)
         time.sleep(5)
-        if GPIO.input(1) == GPIO.LOW:
+        if GPIO.input(jala_nupp) == GPIO.LOW:
             nupp = "on"
-            GPIO.output(12, True)
-        GPIO.output(7, False)
+            GPIO.output(jala_sinine, True)
+        GPIO.output(auto_roheline, False)
         for _ in range(0,3):
-            GPIO.output(8, True)
+            GPIO.output(auto_kollane, True)
             time.sleep(0.4)
-            GPIO.output(8, False)
+            GPIO.output(auto_kollane, False)
             time.sleep(0.4)
-        if GPIO.input(1) == GPIO.LOW:
+        if GPIO.input(jala_nupp) == GPIO.LOW:
             nupp = "on"
-            GPIO.output(12, True)
+            GPIO.output(jala_sinine, True)
 
 
 except KeyboardInterrupt:
