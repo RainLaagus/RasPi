@@ -19,8 +19,14 @@ jala_roheline = 20
 jala_sinine = 12
 jala_nupp = 1
 
+def button_callback(button):
+    print('Button {} pressed'.format(button))
+    GPIO.output(jala_sinine, True)
+    global nupp
+    nupp = "on"
 
-GPIO.add_event_detect(jala_nupp, GPIO.RISING)
+GPIO.add_event_detect(jala_nupp, GPIO.RISING, callback=lambda x: button_callback(1), bouncetime=200)
+
 
 nupp = "off"
 try:
@@ -50,9 +56,6 @@ try:
             GPIO.output(auto_kollane, False)
             time.sleep(0.4)
             
-        if GPIO.event_detected(jala_nupp):
-            GPIO.output(jala_sinine, True)
-            nupp = "on"
 
 
 
@@ -62,8 +65,3 @@ except:
     print("Other exception")
 finally:
     GPIO.cleanup()
-
-    def button_callback(button):
-    print('Button {} pressed'.format(button))
-
-GPIO.add_event_detect(button, GPIO.FALLING, callback=lambda x: button_callback(1))
