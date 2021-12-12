@@ -20,7 +20,7 @@ jala_sinine = 12
 jala_nupp = 1
 
 def button_callback(button):
-    print('Button {} pressed'.format(button))
+    print('Nupp on vajutatud')
     GPIO.output(jala_sinine, True)
     global nupp
     nupp = "on"
