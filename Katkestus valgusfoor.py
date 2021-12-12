@@ -62,3 +62,8 @@ except:
     print("Other exception")
 finally:
     GPIO.cleanup()
+
+    def button_callback(button):
+    print('Button {} pressed'.format(button))
+
+GPIO.add_event_detect(button, GPIO.FALLING, callback=lambda x: button_callback(1))
